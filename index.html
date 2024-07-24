@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Alumnos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="contenedor">
+        <header>
+          <br>
+            <h1>Universidad Imperial</h1>
+            <p>"Forjando líderes del mañana"</p>
+        </header>
+        <h2>Control Escolar</h2>
+        <div class="botones">
+            <button id="abrir-modal-alta">Dar de alta un alumno</button>
+            <button id="abrir-modal-inscribir">Inscribir alumno a una clase</button>
+            <button id="abrir-modal-calificacion">Asignar calificación</button>
+            <button id="abrir-modal-grupo">Crear grupo</button>
+            <button id="abrir-modal-asignar-grupo">Asignar alumno a un grupo</button>
+        </div>
+
+        <div>
+            <label for="buscar-nombre">Buscar por Nombre:</label>
+            <input type="text" id="buscar-nombre">
+            <button id="boton-buscar-nombre">Buscar</button>
+
+            <label for="buscar-apellido">Buscar por Apellido:</label>
+            <input type="text" id="buscar-apellido">
+            <button id="boton-buscar-apellido">Buscar</button>
+
+            <label for="buscar-sexo">Buscar por Sexo:</label>
+            <select id="buscar-sexo">
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+                <option value="Prefiero no responder">Prefiero no responder</option>
+            </select>
+            <button id="boton-buscar-sexo">Buscar</button>
+        </div>
+
+        <div>
+            <label for="nombre-promedio">Obtener Promedio de Alumno:</label>
+            <input type="text" id="nombre-promedio">
+            <button id="boton-obtener-promedio">Obtener Promedio</button>
+            <p>Promedio: <span id="promedio-alumno"></span></p>
+        </div>
+
+        <h2>Lista de Alumnos</h2>
+        <div class="ordenar-botones">
+            <button id="ordenar-ascendente">Ordenar de menor a mayor</button>
+            <button id="ordenar-descendente">Ordenar de mayor a menor</button>
+        </div>
+        <table id="tabla-alumnos" border="1">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Edad</th>
+                    <th>Sexo</th>
+                    <th>Materias Inscritas</th>
+                    <th>Calificaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aquí se agregarán las filas de alumnos -->
+            </tbody>
+        </table>
+
+        <div>
+            <label for="nombre-grupo-promedio">Obtener Promedio de Grupo:</label>
+            <input type="text" id="nombre-grupo-promedio">
+            <button id="boton-obtener-promedio-grupo">Obtener Promedio</button>
+            <p>Promedio del Grupo: <span id="promedio-grupo"></span></p>
+        </div>
+
+        <h2>Grupos</h2>
+        <table id="tabla-grupos" border="1">
+            <thead>
+                <tr>
+                    <th>Nombre de Grupo</th>
+                    <th>Integrantes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aquí se agregarán las filas de grupos -->
+            </tbody>
+        </table>
+
+        <div id="modal-alta" class="modal">
+            <div class="modal-contenido">
+                <span class="cerrar">&times;</span>
+                <h2>Dar de alta un alumno</h2>
+                <form id="form-alta-alumno">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                    <label for="apellidos">Apellidos:</label>
+                    <input type="text" id="apellidos" name="apellidos" required>
+                    <label for="edad">Edad:</label>
+                    <input type="number" id="edad" name="edad" required>
+                    <label for="sexo">Sexo:</label>
+                    <select id="sexo" name="sexo" required>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                        <option value="Prefiero no responder">Prefiero no responder</option>
+                    </select>
+                    <button type="submit">Dar de alta</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="modal-inscribir" class="modal">
+            <div class="modal-contenido">
+                <span class="cerrar">&times;</span>
+                <h2>Inscribir Alumno a una Clase</h2>
+                <form id="form-inscribir-clase">
+                    <label for="nombre-alumno">Nombre del Alumno:</label>
+                    <input type="text" id="nombre-alumno" name="nombre-alumno" required>
+                    <label for="materia">Materia:</label>
+                    <select id="materia" name="materia" required>
+                        <option value="Matemáticas">Matemáticas</option>
+                        <option value="Física">Física</option>
+                        <option value="Química">Química</option>
+                        <option value="Biología">Biología</option>
+                        <option value="Historia">Historia</option>
+                        <option value="Geografía">Geografía</option>
+                        <option value="Lengua">Lengua</option>
+                        <option value="Literatura">Literatura</option>
+                        <option value="Filosofía">Filosofía</option>
+                        <option value="Arte">Arte</option>
+                    </select>
+                    <button type="submit">Inscribir</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="modal-calificacion" class="modal">
+            <div class="modal-contenido">
+                <span class="cerrar">&times;</span>
+                <h2>Asignar Calificación</h2>
+                <form id="form-asignar-calificacion">
+                    <label for="nombre-alumno-calificacion">Nombre del Alumno:</label>
+                    <input type="text" id="nombre-alumno-calificacion" name="nombre-alumno-calificacion" required>
+                    <button type="button" id="cargar-materias">Cargar Materias</button>
+                    <label for="materia-calificacion">Materia:</label>
+                    <select id="materia-calificacion" name="materia-calificacion" required>
+                        <!-- Aquí se llenarán las materias inscritas -->
+                    </select>
+                    <label for="calificacion">Calificación:</label>
+                    <input type="number" id="calificacion" name="calificacion" required>
+                    <button type="submit">Asignar</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="modal-grupo" class="modal">
+            <div class="modal-contenido">
+                <span class="cerrar">&times;</span>
+                <h2>Crear Grupo</h2>
+                <form id="form-crear-grupo">
+                    <label for="nombre-grupo">Nombre del Grupo:</label>
+                    <input type="text" id="nombre-grupo" name="nombre-grupo" required>
+                    <button type="submit">Crear Grupo</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="modal-asignar-grupo" class="modal">
+            <div class="modal-contenido">
+                <span class="cerrar">&times;</span>
+                <h2>Asignar Alumno a un Grupo</h2>
+                <form id="form-asignar-grupo">
+                    <label for="nombre-alumno-grupo">Nombre del Alumno:</label>
+                    <input type="text" id="nombre-alumno-grupo" name="nombre-alumno-grupo" required>
+                    <button type="button" id="cargar-grupos">Cargar Grupos</button>
+                    <label for="nombre-grupo-asignar">Nombre del Grupo:</label>
+                    <select id="nombre-grupo-asignar" name="nombre-grupo-asignar" required>
+                        <!-- Aquí se llenarán los nombres de los grupos -->
+                    </select>
+                    <button type="submit">Asignar al Grupo</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
